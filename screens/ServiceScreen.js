@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, ScrollView, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView, Image } from 'react-native';
 import { getOpenAIResponse } from '../services/openai';
 import { useFoodsPersistentStore } from '../store';
 import theme from '../styles/theme';
@@ -55,157 +55,57 @@ const ServiceScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Food Analysis</Text>
+    <View style={theme.serviceScreenContainer}>
+      <Text style={theme.serviceScreenTitle}>Food Analysis</Text>
 
       {imageUri && (
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: imageUri }} style={styles.foodImage} />
+        <View style={theme.serviceScreenImageContainer}>
+          <Image source={{ uri: imageUri }} style={theme.serviceScreenFoodImage} />
         </View>
       )}
 
       {loading ? (
-        <View style={styles.loadingContainer}>
+        <View style={theme.serviceScreenLoadingContainer}>
           <ActivityIndicator size="large" color="#FFFFFF" />
-          <Text style={styles.loadingText}>Analyzing your food...</Text>
+          <Text style={theme.serviceScreenLoadingText}>Analyzing your food...</Text>
         </View>
       ) : response ? (
-        <ScrollView style={styles.responseContainer}>
+        <ScrollView style={theme.serviceScreenResponseContainer}>
           {typeof response === 'object' ? (
-            <View style={styles.resultContainer}>
-              <Text style={styles.foodNameText}>{response.food_name}</Text>
-              <Text style={styles.weightText}>{response.grams} grams</Text>
-              <TouchableOpacity style={styles.saveButton} onPress={saveToFoodList}>
-                <Text style={styles.saveButtonText}>Save to Food List</Text>
+            <View style={theme.serviceScreenResultContainer}>
+              <Text style={theme.serviceScreenFoodNameText}>{response.food_name}</Text>
+              <Text style={theme.serviceScreenWeightText}>{response.grams} grams</Text>
+              <TouchableOpacity style={theme.serviceScreenSaveButton} onPress={saveToFoodList}>
+                <Text style={theme.serviceScreenSaveButtonText}>Save to Food List</Text>
               </TouchableOpacity>
             </View>
           ) : (
-            <Text style={styles.responseText}>{response}</Text>
+            <Text style={theme.serviceScreenResponseText}>{response}</Text>
           )}
         </ScrollView>
       ) : (
-        <Text style={styles.waitingText}>Waiting for image analysis...</Text>
+        <Text style={theme.serviceScreenWaitingText}>Waiting for image analysis...</Text>
       )}
 
-      <View style={styles.buttonContainer}>
+      <View style={theme.serviceScreenButtonContainer}>
         <TouchableOpacity
-          style={styles.button}
+          style={theme.serviceScreenButton}
           onPress={retakePhoto}
         >
-          <Text style={styles.buttonText}>Retake Photo</Text>
+          <Text style={theme.serviceScreenButtonText}>Retake Photo</Text>
         </TouchableOpacity>
 
         {imageUri && !loading && !response && (
           <TouchableOpacity
-            style={styles.button}
+            style={theme.serviceScreenButton}
             onPress={() => analyzeImage(imageUri)}
           >
-            <Text style={styles.buttonText}>Analyze Again</Text>
+            <Text style={theme.serviceScreenButtonText}>Analyze Again</Text>
           </TouchableOpacity>
         )}
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#121212',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  imageContainer: {
-    width: '100%',
-    height: 250,
-    borderRadius: 8,
-    overflow: 'hidden',
-    marginBottom: 16,
-    backgroundColor: '#1E1E1E',
-  },
-  foodImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    color: '#FFFFFF',
-    marginTop: 16,
-    fontSize: 16,
-  },
-  waitingText: {
-    color: '#AAAAAA',
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  responseContainer: {
-    flex: 1,
-    backgroundColor: '#1E1E1E',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
-  },
-  resultContainer: {
-    alignItems: 'center',
-    padding: 10,
-  },
-  foodNameText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginBottom: 8,
-  },
-  weightText: {
-    fontSize: 18,
-    color: '#CCCCCC',
-    marginBottom: 24,
-  },
-  responseText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  button: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    padding: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    margin: 8,
-  },
-  buttonText: {
-    color: '#000000',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  saveButton: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    marginTop: 16,
-  },
-  saveButtonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-});
 
 export default ServiceScreen;
