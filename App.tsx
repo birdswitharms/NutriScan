@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import PhotoScreen from './screens/PhotoScreen';
+import ServiceScreen from './screens/ServiceScreen';
 import theme from "./styles/theme"
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ function App() {
         <Stack.Navigator initialRouteName="Dashboard">
           <Stack.Screen name="Dashboard" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Service" component={ServiceScreen} />
           <Stack.Screen name="Photo" component={PhotoScreen} />
         </Stack.Navigator>
       </View>

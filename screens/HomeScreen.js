@@ -24,16 +24,23 @@ function HomeScreen({ navigation }) {
         ))}
       </ScrollView>
 
-      <TouchableOpacity
-        style={[theme.button, theme.buttonTop]}
-        onPress={() => navigation.navigate('Details')}>
-        <Text style={theme.buttonText}>Manually Add</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[theme.button, theme.buttonBottom]}
-        onPress={() => navigation.navigate('Photo')}>
-        <Text style={theme.buttonText}>Add by Photo</Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: 'column' }}>
+        <TouchableOpacity
+          style={[theme.button]}
+          onPress={() => navigation.navigate('Details')}>
+          <Text style={theme.buttonText}>Manually Add</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[theme.button]}
+          onPress={() => navigation.navigate('Photo')}>
+          <Text style={theme.buttonText}>Add by Photo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[theme.button]}
+          onPress={() => navigation.navigate('Service')}>
+          <Text style={theme.buttonText}>Service Screen</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

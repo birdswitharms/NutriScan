@@ -42,11 +42,9 @@ function PhotoScreen({ navigation }) {
         // Save to device gallery
         await MediaLibrary.saveToLibraryAsync(photo.uri);
 
-        // Navigate to Details with the photo data
-        navigation.navigate('Details', {
-          photoUri: photo.uri,
-          imageWidth: photo.width,
-          imageHeight: photo.height
+        // Navigate to Service screen with the photo data instead of Details
+        navigation.navigate('Service', {
+          photoUri: photo.uri
         });
       } catch (error) {
         console.error("Error taking picture:", error);
@@ -61,9 +59,6 @@ function PhotoScreen({ navigation }) {
     <View style={styles.container}>
       <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.flipButton} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
             <Text style={styles.text}>Take Photo</Text>
           </TouchableOpacity>

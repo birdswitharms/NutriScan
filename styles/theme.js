@@ -27,17 +27,7 @@ const theme = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#000000',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     margin: 16,
-  },
-  buttonTop: {
-    bottom: 56,
-  },
-  buttonBottom: {
-    bottom: 0,
   },
   buttonText: {
     color: '#000000',
