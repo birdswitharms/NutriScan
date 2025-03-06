@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { useFoodsPersistentStore } from '../store';
 import theme from '../styles/theme';
 

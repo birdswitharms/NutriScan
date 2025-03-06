@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "FoodTrackerAI",
+    "name": "NutriScan",
     "slug": "NutriScan",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,6 +12,22 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow NutriScan to access your camera."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow NutriScan to access your photos.",
+          "savePhotosPermission": "Allow NutriScan to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },

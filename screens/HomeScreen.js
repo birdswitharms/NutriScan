@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useFoodsPersistentStore } from '../store';
 import theme from '../styles/theme';
 
@@ -8,21 +8,32 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={theme.container}>
-      <Button
-        title="Add food"
-        onPress={() => navigation.navigate('Details')}
-      />
-      <View style={theme.foodDetails}>
+      <ScrollView style={theme.foodDetails}>
         {foodList.map((food, index) => (
-          <View key={index} style={theme.foodItem}>
-            <Text style={theme.label}>Food Name: {food.foodName}</Text>
-            <Text style={theme.label}>Calories: {food.calories}</Text>
-            <Text style={theme.label}>Protein: {food.protein}</Text>
-            <Text style={theme.label}>Carbs: {food.carbs}</Text>
-            <Text style={theme.label}>Fat: {food.fat}</Text>
+          <View key={index}>
+            <View style={[theme.foodItem, index % 2 === 1 && theme.foodItemOdd]}>
+              <Text style={theme.label}>{food.foodName}</Text>
+              <Text style={theme.label}>Calories: {food.calories}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={[theme.label, { marginRight: 8 }]}>P: {food.protein}</Text>
+                <Text style={[theme.label, { marginRight: 8 }]}>C: {food.carbs}</Text>
+                <Text style={theme.label}>F: {food.fat}</Text>
+              </View>
+            </View>
           </View>
         ))}
-      </View>
+      </ScrollView>
+
+      <TouchableOpacity
+        style={[theme.button, theme.buttonTop]}
+        onPress={() => navigation.navigate('Details')}>
+        <Text style={theme.buttonText}>Manually Add</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[theme.button, theme.buttonBottom]}
+        onPress={() => navigation.navigate('Photo')}>
+        <Text style={theme.buttonText}>Add by Photo</Text>
+      </TouchableOpacity>
     </View>
   );
 }
